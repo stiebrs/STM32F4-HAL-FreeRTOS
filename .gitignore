@@ -1,0 +1,7 @@
+.project
+.mxproject
+.cproject
+*.ioc
+mx.scratch
+build/
+.dep/
