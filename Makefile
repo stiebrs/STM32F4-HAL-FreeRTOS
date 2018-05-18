@@ -33,12 +33,11 @@ SOURCES_DIR =  \
 Application \
 Drivers \
 Middlewares/FreeRTOS \
-Application/User/Src/ \
+Application/User/Src \
 Application/User \
 Drivers/CMSIS \
 Drivers/STM32F4xx_HAL_Driver \
-Middlewares \
-Application/User/Src
+Middlewares 
 
 # firmware library path
 PERIFLIB_PATH = 
@@ -65,6 +64,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
 Src/tim.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Src/usart.c \
+Src/printf_retarget.c \
 Middlewares/Third_Party/FreeRTOS/Source/croutine.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
 /Src/system_stm32f4xx.c \
@@ -90,7 +90,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
 Src/stm32f4xx_hal_msp.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Src/gpio.c \
-Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c  
+Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c 
 
 # ASM sources
 ASM_SOURCES =  \

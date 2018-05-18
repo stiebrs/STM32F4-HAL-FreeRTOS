@@ -54,6 +54,7 @@
 
 /* Variables -----------------------------------------------------------------*/
 osThreadId defaultTaskHandle, blinkyTaskHandle;
+osThreadId ;
 
 /* Function prototypes -------------------------------------------------------*/
 void StartDefaultTask(void const * argument);

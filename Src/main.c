@@ -54,7 +54,7 @@
 #include "dma2d.h"
 #include "spi.h"
 #include "tim.h"
-#include "usart.h"
+#include "printf_retarget.h"
 #include "usb_otg.h"
 #include "gpio.h"
 
@@ -78,7 +78,6 @@ int main(void) {
   MX_TIM1_Init();
   MX_USB_OTG_HS_USB_Init();
   MX_USART1_UART_Init();
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_SET);
 
   printf("System configured!\r\n");
 
@@ -95,21 +94,7 @@ int main(void) {
 
 }
 
-/* (Re)Define stdio functionality, so printf would output to USART1 */
-int __io_putchar(int ch) {
-	uint8_t c[1];
-	c[0] = ch & 0x00FF;
-	HAL_UART_Transmit(&huart1, &c[0], 1, 10);
-	return ch;
-}
 
-int _write(int file,char *ptr, int len) {
-	int DataIdx;
-	for(DataIdx= 0; DataIdx< len; DataIdx++) {
-		__io_putchar(*ptr++);
-	}
-	return len;
-}
 
 
 /**
