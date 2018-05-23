@@ -49,47 +49,36 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "spi.h"
-
 #include "gpio.h"
-
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 SPI_HandleTypeDef hspi5;
 
 /* SPI5 init function */
-void MX_SPI5_Init(void)
-{
+void MX_SPI5_Init(void) {
 
   hspi5.Instance = SPI5;
   hspi5.Init.Mode = SPI_MODE_MASTER;
   hspi5.Init.Direction = SPI_DIRECTION_2LINES;
   hspi5.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi5.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi5.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi5.Init.CLKPolarity = SPI_POLARITY_HIGH;
+  hspi5.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi5.Init.NSS = SPI_NSS_SOFT;
   hspi5.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi5.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi5.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi5.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi5.Init.CRCPolynomial = 10;
-  if (HAL_SPI_Init(&hspi5) != HAL_OK)
-  {
+  if (HAL_SPI_Init(&hspi5) != HAL_OK) {
     _Error_Handler(__FILE__, __LINE__);
   }
 
 }
 
-void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
-{
+void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle) {
 
   GPIO_InitTypeDef GPIO_InitStruct;
-  if(spiHandle->Instance==SPI5)
-  {
-  /* USER CODE BEGIN SPI5_MspInit 0 */
+  if(spiHandle->Instance==SPI5) {
 
-  /* USER CODE END SPI5_MspInit 0 */
     /* SPI5 clock enable */
     __HAL_RCC_SPI5_CLK_ENABLE();
   
@@ -104,21 +93,12 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI5;
     HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN SPI5_MspInit 1 */
-
-  /* USER CODE END SPI5_MspInit 1 */
   }
 }
 
-void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
-{
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle) {
 
-  if(spiHandle->Instance==SPI5)
-  {
-  /* USER CODE BEGIN SPI5_MspDeInit 0 */
-
-  /* USER CODE END SPI5_MspDeInit 0 */
+  if(spiHandle->Instance == SPI5) {
     /* Peripheral clock disable */
     __HAL_RCC_SPI5_CLK_DISABLE();
   
@@ -128,16 +108,8 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
     PF9     ------> SPI5_MOSI 
     */
     HAL_GPIO_DeInit(GPIOF, SPI5_SCK_Pin|SPI5_MISO_Pin|SPI5_MOSI_Pin);
-
-  /* USER CODE BEGIN SPI5_MspDeInit 1 */
-
-  /* USER CODE END SPI5_MspDeInit 1 */
   }
 } 
-
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
 
 /**
   * @}

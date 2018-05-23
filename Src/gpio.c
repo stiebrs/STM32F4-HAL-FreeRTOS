@@ -49,16 +49,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
 /* Configure GPIO                                                             */
 /*----------------------------------------------------------------------------*/
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
 
 /** Configure pins as 
         * Analog 
@@ -132,8 +126,7 @@
      PE0   ------> FMC_NBL0
      PE1   ------> FMC_NBL1
 */
-void MX_GPIO_Init(void)
-{
+void MX_GPIO_Init(void) {
 
   GPIO_InitTypeDef GPIO_InitStruct;
 
@@ -369,9 +362,6 @@ void MX_GPIO_Init(void)
 
 }
 
-/* USER CODE BEGIN 2 */
-
-/* USER CODE END 2 */
 
 /**
   * @}

@@ -51,14 +51,15 @@
 #include "task.h"
 #include "cmsis_os.h"
 #include "gpio.h"
+#include "spi.h"
 
 /* Variables -----------------------------------------------------------------*/
-osThreadId defaultTaskHandle, blinkyTaskHandle;
-osThreadId ;
+osThreadId defaultTaskHandle, blinkyTaskHandle, gyroTaskHandle;
 
 /* Function prototypes -------------------------------------------------------*/
 void StartDefaultTask(void const * argument);
 void vBlinkyTask(void const * argument);
+void vGyroTesterTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -102,20 +103,22 @@ __attribute__((weak)) void vApplicationMallocFailedHook(void) {
 
 void MX_FREERTOS_Init(void) {
 
-	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 1000);
+	osThreadDef(defaultTask, StartDefaultTask, osPriorityLow, 0, 1000);
 	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-	osThreadDef(blinkyTask, vBlinkyTask, osPriorityNormal, 0, 1000);
+	osThreadDef(blinkyTask, vBlinkyTask, osPriorityLow, 0, 1000);
 	blinkyTaskHandle = osThreadCreate(osThread(blinkyTask), NULL);
 
+	osThreadDef(gyroTask, vGyroTesterTask, osPriorityHigh, 0, 1000);
+	gyroTaskHandle = osThreadCreate(osThread(gyroTask), NULL);
 }
 
 /* StartDefaultTask function which blinks LED2 every 1s */
 void StartDefaultTask(void const * argument) {
 
   for(;;) {
-	  osDelay(500);
-	  HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_14);
+	osDelay(500);
+	HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_14);
 
   }
 }
@@ -129,6 +132,22 @@ void vBlinkyTask(void const * argument) {
 		}
 		osDelay(1000);
 	}
+}
+
+void vGyroTesterTask(void const * argument) {
+	HAL_StatusTypeDef response = HAL_ERROR; // default to error
+	uint8_t txbuf[3] = {0x0F | 0x80, 0x00};	// 0x0F is WHO_AM_I register, 0x80 read bit, should return 0b11010100 or 0xD4
+	uint8_t rxbuf[3] = {0x00, 0x00};
+
+	HAL_GPIO_WritePin(NCS_MEMS_SPI_GPIO_Port, NCS_MEMS_SPI_Pin, GPIO_PIN_RESET);
+	response = HAL_SPI_TransmitReceive(&hspi5, txbuf, rxbuf, 2, 1000);
+	HAL_GPIO_WritePin(NCS_MEMS_SPI_GPIO_Port, NCS_MEMS_SPI_Pin, GPIO_PIN_SET);
+	if (response == HAL_OK) {
+		printf("Sent: %02x %02x Got: %02x %02x\r\n", txbuf[0], txbuf[1], rxbuf[0], rxbuf[1]);
+	} else {
+		printf("Got error response as %d\r\n", response);
+	}
+	osThreadTerminate(gyroTaskHandle);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
