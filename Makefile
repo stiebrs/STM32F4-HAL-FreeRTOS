@@ -106,7 +106,11 @@ PERIFLIB_SOURCES =
 #######################################
 # binaries
 #######################################
+ifeq ($(OS),Windows_NT)
+BINPATH = C:\tools\arm-gcc\7-2017-q4-major\bin
+else
 BINPATH = ~/tools/gcc-arm-none-eabi-7-2017-q4-major/bin/
+endif
 PREFIX = arm-none-eabi-
 CC = $(BINPATH)/$(PREFIX)gcc
 AS = $(BINPATH)/$(PREFIX)gcc -x assembler-with-cpp
