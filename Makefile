@@ -108,9 +108,12 @@ PERIFLIB_SOURCES =
 #######################################
 ifeq ($(OS),Windows_NT)
 BINPATH = C:\tools\arm-gcc\7-2017-q4-major\bin
+RM := rmdir /Q /S
 else
 BINPATH = ~/tools/gcc-arm-none-eabi-7-2017-q4-major/bin/
+RM := rm -rf
 endif
+
 PREFIX = arm-none-eabi-
 CC = $(BINPATH)/$(PREFIX)gcc
 AS = $(BINPATH)/$(PREFIX)gcc -x assembler-with-cpp
@@ -223,7 +226,7 @@ $(BUILD_DIR):
 # clean up
 #######################################
 clean:
-	-rm -fR .dep $(BUILD_DIR)
+	$(RM) .dep $(BUILD_DIR)
   
 #######################################
 # dependencies

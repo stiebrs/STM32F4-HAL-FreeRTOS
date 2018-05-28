@@ -77,7 +77,7 @@ void MX_SPI5_Init(void) {
 void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle) {
 
   GPIO_InitTypeDef GPIO_InitStruct;
-  if(spiHandle->Instance==SPI5) {
+  if(spiHandle->Instance == SPI5) {
 
     /* SPI5 clock enable */
     __HAL_RCC_SPI5_CLK_ENABLE();

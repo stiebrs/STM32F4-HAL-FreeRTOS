@@ -94,9 +94,6 @@ int main(void) {
 
 }
 
-
-
-
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -145,10 +142,6 @@ void SystemClock_Config(void) {
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
 }
-
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  Period elapsed callback in non blocking mode
