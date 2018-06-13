@@ -13,3 +13,6 @@ List of topics and links to individual pages is available on [the main project p
 
 
 [Part IV: IDE (Eclipse) setup](https://blog.shirtec.com/2018/05/stm32-hal-freertos-part-iv-ide-eclipse.html) briefly shows how to import Makefile project into Eclipse and how to get it to recognize all the symbols used, so that actual errors don't get swamped out by Eclipse bitching about symbols.
+
+
+[Part V: SPI with DMA](https://blog.shirtec.com/2018/06/stm32-hal-freertos-part-v-spi-with-dma.html) shows how to set up DMA communications, as well as use of queue to pass a custom data structure from interrupts and code to a separate processing task.

@@ -51,7 +51,6 @@
 #include "stm32f4xx_hal.h"
 #include "cmsis_os.h"
 #include "crc.h"
-#include "dma2d.h"
 #include "spi.h"
 #include "tim.h"
 #include "printf_retarget.h"
@@ -69,16 +68,13 @@ int main(void) {
   HAL_Init();
   SystemClock_Config();
 
-
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CRC_Init();
-  MX_DMA2D_Init();
-  MX_SPI5_Init();
-  MX_TIM1_Init();
-  MX_USB_OTG_HS_USB_Init();
   MX_USART1_UART_Init();
+  MX_SPI5_Init();
 
+  /* Clear screen */
+  printf("\033c");
   printf("System configured!\r\n");
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -177,10 +173,7 @@ void _Error_Handler(char *file, int line) {
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line) {
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+     printf("Wrong parameters value: file %s on line %ld\r\n", file, line);
 }
 #endif /* USE_FULL_ASSERT */
 

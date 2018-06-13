@@ -227,6 +227,10 @@
 #define LD3_GPIO_Port GPIOG
 #define LD4_Pin GPIO_PIN_14
 #define LD4_GPIO_Port GPIOG
+#define LED_GREEN_Port GPIOG
+#define LED_GREEN_Pin GPIO_PIN_13
+#define LED_RED_Port GPIOG
+#define LED_RED_Pin GPIO_PIN_14
 #define SDNCAS_Pin GPIO_PIN_15
 #define SDNCAS_GPIO_Port GPIOG
 #define SDCKE1_Pin GPIO_PIN_5
