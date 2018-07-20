@@ -245,6 +245,18 @@
 #define NBL0_GPIO_Port GPIOE
 #define NBL1_Pin GPIO_PIN_1
 #define NBL1_GPIO_Port GPIOE
+#define OTG_FS_PSO_Pin GPIO_PIN_4
+#define OTG_FS_PSO_GPIO_Port GPIOC
+#define OTG_FS_OC_Pin GPIO_PIN_5
+#define OTG_FS_OC_GPIO_Port GPIOC
+#define OTG_HS_ID_Pin GPIO_PIN_12
+#define OTG_HS_ID_GPIO_Port GPIOB
+#define VBUS_HS_Pin GPIO_PIN_13
+#define VBUS_HS_GPIO_Port GPIOB
+#define OTG_HS_DM_Pin GPIO_PIN_14
+#define OTG_HS_DM_GPIO_Port GPIOB
+#define OTG_HS_DP_Pin GPIO_PIN_15
+#define OTG_HS_DP_GPIO_Port GPIOB
 
 /* ########################## Assert Selection ############################## */
 /**

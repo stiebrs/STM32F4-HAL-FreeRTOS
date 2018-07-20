@@ -4,6 +4,7 @@
 #include "gpio.h"
 #include "spi.h"
 #include "stm32f4xx_it.h"
+#include "usbd_hid.h"
 
 /* Variables -----------------------------------------------------------------*/
 osThreadId defaultTaskHandle, blinkyTaskHandle, gyroTaskHandle, gyroPrinterHandle;
@@ -12,8 +13,10 @@ uint8_t rxbuf[3] = {0x00, 0x00};
 uint8_t txbuf[3] = {0x0F | 0x80, 0x00};	// 0x0F is WHO_AM_I register, 0x80 read bit, should return 0b11010100 or 0xD4
 osPoolDef(spi_pool, 10, SPI_QueueItem_t);
 osPoolId spi_pool;
+extern USBD_HandleTypeDef hUsbDeviceHS;
 
 /* Function prototypes -------------------------------------------------------*/
+extern void MX_USB_DEVICE_Init(void);
 void StartDefaultTask(void const * argument);
 void vBlinkyTask(void const * argument);
 void vGyroTesterTask(void const * argument);
@@ -86,9 +89,12 @@ void MX_FREERTOS_Init(void) {
 
 /* StartDefaultTask function which blinks LED2 every 1s */
 void StartDefaultTask(void const * argument) {
-
-  for(;;) {
-  }
+	uint8_t report[] = {0x00, 0x10, 0x10, 0x00};
+	MX_USB_DEVICE_Init();
+	for(;;) {
+		USBD_HID_SendReport(&hUsbDeviceHS, &report, 4);
+		osDelay(5000);
+	}
 }
 
 /* vBlinkyTask function which blinks LED1 every 10s and outputs a string to UART */

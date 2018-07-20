@@ -6,6 +6,8 @@
 
 extern TIM_HandleTypeDef htim6;
 extern SPI_HandleTypeDef hspi5;
+extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
+
 extern osMessageQId xGyroQueue;
 extern uint8_t rxbuf[3];
 extern uint8_t txbuf[3];
@@ -45,4 +47,14 @@ void SPI5_IRQHandler(void) {
 	spiDone = 1;
 	HAL_SPI_IRQHandler(&hspi5);
 	HAL_GPIO_WritePin(NCS_MEMS_SPI_GPIO_Port, NCS_MEMS_SPI_Pin, GPIO_PIN_SET);
+}
+
+/**
+  * @brief  This function handles USB-On-The-Go FS global interrupt request.
+  * @param  None
+  * @retval None
+  */
+
+void OTG_HS_IRQHandler(void) {
+	HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
 }
