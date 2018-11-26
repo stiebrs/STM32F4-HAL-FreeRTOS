@@ -1,2 +1,2 @@
 This is an example showing how to obtain over 10Mbit USART signal generation from STM32F42x. 
-[Blog post] (https://blog.shirtec.com/2018/11/10-mbit-usart-signal-on-stm32f429.html) has description of changes in details.
+[Blog post](https://blog.shirtec.com/2018/11/10-mbit-usart-signal-on-stm32f429.html) has description of changes in details.
