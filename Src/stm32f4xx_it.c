@@ -4,31 +4,36 @@
 #include "cmsis_os.h"
 #include "spi.h"
 
+/* Hardware IRQs */
 extern TIM_HandleTypeDef htim6;
 extern SPI_HandleTypeDef hspi5;
+extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
+
+/* OS stuff */
 extern osMessageQId xGyroQueue;
-extern uint8_t rxbuf[3];
-extern uint8_t txbuf[3];
 extern osPoolId spi_pool;
 
+/* User vars */
+extern uint8_t rxbuf[3];
+extern uint8_t txbuf[3];
 /******************************************************************************/
-/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 
 /**
-* @brief This function handles System tick timer.
-*/
+ * @brief This function handles System tick timer.
+ */
 void SysTick_Handler(void) {
-  osSystickHandler();
+	osSystickHandler();
 }
 
 void TIM6_DAC_IRQHandler(void) {
-  HAL_TIM_IRQHandler(&htim6);
+	HAL_TIM_IRQHandler(&htim6);
 }
 
 // SPI5 DMA receive done
 void DMA2_Stream3_IRQHandler(void) {
-	SPI_QueueItem_t *item = (SPI_QueueItem_t*)osPoolAlloc(spi_pool);
+	SPI_QueueItem_t *item = (SPI_QueueItem_t*) osPoolAlloc(spi_pool);
 	item->value = rxbuf[1];
 	item->source = "DMA IRQ";
 	osMessagePut(xGyroQueue, (uint32_t) item, 0);
@@ -45,4 +50,8 @@ void SPI5_IRQHandler(void) {
 	spiDone = 1;
 	HAL_SPI_IRQHandler(&hspi5);
 	HAL_GPIO_WritePin(NCS_MEMS_SPI_GPIO_Port, NCS_MEMS_SPI_Pin, GPIO_PIN_SET);
+}
+
+void OTG_HS_IRQHandler(void) {
+	HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
 }
