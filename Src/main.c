@@ -1,12 +1,10 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "cmsis_os.h"
-#include "crc.h"
-#include "spi.h"
 #include "tim.h"
 #include "printf_retarget.h"
-#include "usb_otg.h"
 #include "gpio.h"
+#include "usart.h"
 
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
@@ -20,8 +18,9 @@ int main(void) {
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_TIM8_Init();
+  start_TIM8();
   MX_USART1_UART_Init();
-  MX_SPI5_Init();
 
   /* Clear screen */
   printf("\033c");

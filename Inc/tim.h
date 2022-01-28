@@ -8,10 +8,13 @@
 #include "main.h"
 
 extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim8;
 
 extern void _Error_Handler(char *, int);
 
 void MX_TIM1_Init(void);
+void MX_TIM8_Init(void);
+void start_TIM8(void);
 
 #ifdef __cplusplus
 }

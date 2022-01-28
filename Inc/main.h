@@ -53,8 +53,6 @@
 #define OTG_FS_PSO_GPIO_Port GPIOC
 #define OTG_FS_OC_Pin GPIO_PIN_5
 #define OTG_FS_OC_GPIO_Port GPIOC
-#define R3_Pin GPIO_PIN_0
-#define R3_GPIO_Port GPIOB
 #define R6_Pin GPIO_PIN_1
 #define R6_GPIO_Port GPIOB
 #define BOOT1_Pin GPIO_PIN_2
@@ -129,8 +127,6 @@
 #define SDCLK_GPIO_Port GPIOG
 #define HSYNC_Pin GPIO_PIN_6
 #define HSYNC_GPIO_Port GPIOC
-#define G6_Pin GPIO_PIN_7
-#define G6_GPIO_Port GPIOC
 #define I2C3_SDA_Pin GPIO_PIN_9
 #define I2C3_SDA_GPIO_Port GPIOC
 #define I2C3_SCL_Pin GPIO_PIN_8

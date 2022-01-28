@@ -72,14 +72,11 @@ $(MIDDLEWARES_PATH)/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c \
 Src/stm32f4xx_hal_timebase_TIM.c \
 Src/gpio.c \
 Src/stm32f4xx_hal_msp.c \
-Src/spi.c \
-Src/usb_otg.c \
 /Src/system_stm32f4xx.c \
 Src/usart.c \
 Src/printf_retarget.c \
 Src/tim.c \
 Src/stm32f4xx_it.c \
-Src/crc.c \
 Src/freertos.c \
 Src/main.c 
 
